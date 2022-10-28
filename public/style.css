@@ -1,0 +1,152 @@
+:root {
+    --theme-color: #ff385c;
+    --white: #fff; 
+    --black: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    max-width: 67.5rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 0;
+    overflow: hidden;
+}
+
+.heading {
+    font-size: 2.625rem;
+    white-space: nowrap;
+    font-weight: 700;
+    padding: 20px 0 0;
+}
+
+.tagline {
+    white-space: nowrap;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 10px 0 30px;
+}
+
+nav {
+    background: var(--white);
+    height: 4.375rem;
+}
+
+.logo {
+    color: var(--theme-color);
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.375rem;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-menu li a {
+    margin-left: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--black);
+}
+
+header {
+    height: 37.5rem;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgb(253, 253, 253) 100%), url(../images/pexels-maria-orlova-4913428.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+header .container {
+    height: 100%;
+    position: relative;
+}
+
+.banner-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--white);
+}
+
+.card {
+    background: var(--white);
+    border-radius: 0.5rem;
+}
+
+.option-div {
+    border-bottom: 1px solid var(--theme-color);
+    height: 40px;
+}
+
+.search-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 24px;
+}
+
+.option {
+    border: none;
+    background: none;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 1rem;
+}
+
+.search-div input {
+    border: none;
+    background: none;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.location {
+    width: 70%;
+}
+
+.btn {
+    border: none;
+    font-size: 1.1rem;
+    background: var(--theme-color);
+    padding: 10px 16px;
+    border: 0.9rem;
+    color: var(--white);
+}
+
+
+
+
+
+
+
+/* background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%),url(https://images.ctfassets.net/02vwvgr6spsr/5WctlhuvpfLjdmQ1wEpmQG/dba0cf1…/campaign-housefront__1_.jpeg?w=1350&fm=webp&q=75&); */
