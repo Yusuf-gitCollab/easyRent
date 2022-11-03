@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- update the version number as needed -->
@@ -34,9 +34,8 @@
         <div class="navigation">
           <a href="https://easyrent-ec7d6.web.app/"><h1 class="logo">easyRent</h1></a>
           <ul class="nav-menu">
-            <li><a href="">Buy</a></li>
             <li><a href="">Find Rent/PG</a></li>
-            <li><a href="">Find Roommate</a></li>
+            <li><a href="">Shared Room</a></li>
             <li><a href="">Post Property</a></li>
             <li><a href=""> My Account </a></li>
           </ul>
@@ -52,20 +51,43 @@
           <form>
             <div class="card">
               <div class="option-div">
-                <button class="option"> Rent </button>
-                <button class="option"> Paying Guest</button>
-                <button class="option"> Buy</button>
-                <button class="option"> Shared Rooms</button>
+                <button type="button" role="tab" data-state="active" class="tab">Shared Rooms</button>
+                <button type="button" role="tab" data-state="" class="tab">Paying Guest</button>
+                <button type="button" role="tab" data-state="" class="tab">Rent</button>
               </div>
               <div class="search-div">
-                <input type="text" placeholder="Enter a city, town or postcode" class="location">
-                <button class="btn"> Submit </button>
+                <form role="search">
+                  <div class="search-input-wrapper">
+                    <input placeholder="Enter a city, town or postcode">
+                    <button type="button" class="btn" id="search-btn"> 
+                      <div class="icon-search-text-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <p>Search</p>
+                      </div>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </form>
         </div>
       </div>
     </header>
+    <section>
+      <div class="container">
+        <div class="register">
+          <div class="itme1">
+            <h1>Join the millions getting their favorite place to stay!</h1>
+            <p>With easyRent you can search for rented house, paying guest, shared rooms
+              in you desired locations and affordable prices online.
+            </p>
+          </div>
+          <div class="itme2">
+            <img src="" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const loadEl = document.querySelector('#load');
@@ -104,5 +126,6 @@
         }
       });
     </script>
+    <script type="application/json" src="./script.js"></script>
   </body>
 </html>
