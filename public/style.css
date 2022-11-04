@@ -40,11 +40,24 @@ button {
     cursor: pointer;
 }
 
+section {
+    margin: 100px 0;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.section-heading {
+    
+}
+
 .btn {
     background: var(--theme-color);
     color: var(--white);
     padding: 12px 20px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     border-radius: 6px;
     transition: 0.1s all ease-out;
 }
@@ -192,11 +205,78 @@ header .container {
 /* ****************************************************  REGISTER SECTION ************************************************************************************ */
 
 
+.register {
+    background: #FAE1F5;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 40px;
+    line-height: 1.6;
+}
 
+.item1 {
+    flex-basis: 57%;
+}
 
+.item1 h1{
+    padding: 16px 0;
+}
 
+.item1 p {
+    padding: 16px 0 28px;
+}
 
+/* *************************************************** TOP CITIES CONTAINER ***************************************************************************************** */
+.top-cities-container {
+    width: 100%;
+    border: 1px solid red;
+    white-space: nowrap;
+    transition: all 0.3s ease-in-out;
+}
 
+.top-cities-wrap {
+    display: inline-block;
+    vertical-align: top;
+}
 
+.top-cities-card {
+    cursor: pointer;
+    margin-bottom: 12px;
+    width: 300px;
+    padding-right: 20px;
+}
 
-/* background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%),url(https://images.ctfassets.net/02vwvgr6spsr/5WctlhuvpfLjdmQ1wEpmQG/dba0cf1…/campaign-housefront__1_.jpeg?w=1350&fm=webp&q=75&); */
+.top-cities-card > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.top-cities-card  .city-img-div {
+    width: 100px;
+    height: 98px;
+    border-radius: 6px;
+    margin-right: 16px;
+    border: 1px solid yellow;
+}
+
+.city-img-div img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.city-name {
+    color: #041533;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 700;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.caption {
+    font-size: 14px;
+    color: #8993A4;
+}
