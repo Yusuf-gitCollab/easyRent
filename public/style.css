@@ -50,7 +50,19 @@ img {
 }
 
 .section-heading {
-    
+    font-size: 36px;
+    line-height: 1.6;
+    font-weight: 700;
+    display: block;
+    text-align: left;
+    margin: 0px 0 34px;
+}
+
+.highlighted-heading {
+    font-size: 16px;
+    color: var(--theme-color);
+    display: block;
+    text-align: left;
 }
 
 .btn {
@@ -216,24 +228,68 @@ header .container {
     line-height: 1.6;
 }
 
-.item1 {
-    flex-basis: 57%;
+.item2 {
+    padding-left: 16px;
+    flex-basis: 77%;
 }
 
-.item1 h1{
+.item2 h1{
+    font-size: 24px;
     padding: 16px 0;
 }
 
-.item1 p {
+.item2 p {
     padding: 16px 0 28px;
+}
+
+/* **************************************************** SHOWCASE PART ********************************************************************************************** */
+.showcase-card {
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 56px 0 76px;
+}
+
+.showcase-item1 {
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.showcase-item2 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.showcase-item1 > div {
+    margin:0 16px;
+}
+
+.showcase-item2 p{
+    text-transform: uppercase;
+    color:#8993A4;
+}
+
+.showcase-item2 h1 {
+    padding: 12px 0 12px;
+    text-transform: capitalize;
+    
+}
+
+.showcase-item2 h2 {
+    padding: 0 0 28px;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 200;
 }
 
 /* *************************************************** TOP CITIES CONTAINER ***************************************************************************************** */
 .top-cities-container {
     width: 100%;
-    border: 1px solid red;
     white-space: nowrap;
     transition: all 0.3s ease-in-out;
+    overflow-x: scroll;
 }
 
 .top-cities-wrap {
@@ -246,6 +302,12 @@ header .container {
     margin-bottom: 12px;
     width: 300px;
     padding-right: 20px;
+    border-radius: 10px;
+   
+}
+
+.top-cities-card:hover {
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.164);
 }
 
 .top-cities-card > div {
@@ -258,7 +320,6 @@ header .container {
     height: 98px;
     border-radius: 6px;
     margin-right: 16px;
-    border: 1px solid yellow;
 }
 
 .city-img-div img {
@@ -279,4 +340,38 @@ header .container {
 .caption {
     font-size: 14px;
     color: #8993A4;
+}
+
+
+/* *********************************************** FOOTER ******************************************************* */
+footer {
+    background: #f7f6f5;
+    padding: 24px;
+}
+
+.footer {
+    display: flex;
+    align-items: baseline;
+}
+
+.footer-col {
+    margin: 16px;
+}
+
+.footer-col li {
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+.footer-col li:hover {
+    border-bottom: 1px solid var(--theme-color);
+    cursor: pointer;
+}
+
+.footer-col ul li:first-child{
+    font-weight: 500;
+}
+
+.copyright {
+    text-align: center;
 }
