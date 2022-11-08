@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | easyRent</title>
+    <link href="../css/register.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="hero">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log in    </button>
+                <button type="button" class="toggle-btn" onclick="register()">Register</button> 
+            </div>
+            <form id="login" class="input-group">
+                <input type="text" class="input-field" placeholder="user id" required>
+                <input type="password" class="input-field" placeholder="password" required>
+                <input type="checkbox" class="check-box"> <span>Remember me</span>
+                <button type="submit" class="submit-btn">Log in</button>
+            </form>
+            <form id="register" class="input-group">
+                <input type="text" class="input-field" placeholder="user id" required>
+                <input type="email" class="input-field" placeholder="email id" required>
+                <input type="password" class="input-field" placeholder="password" required>
+                <input type="checkbox" class="check-box"> <span>I agree to Tems and Conditions</span>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+    <script src="../public/bundle.js"></script>
+    <script src="./register.js"></script>
+</body>
+</html>
