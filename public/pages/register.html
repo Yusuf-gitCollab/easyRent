@@ -5,48 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | easyRent</title>
-    <link href="../css/register.css" rel="stylesheet" type="text/css">
+    <link href="../../css/style.css" rel="stylesheet" type="text/css">
+    <link href="../../css/register.css" rel="stylesheet" type="text/css">
+    
 </head>
 <body>
+    <nav>
+        <div class="container">
+          <div class="navigation">
+            <a href="https://easyrent-ec7d6.web.app/"><h1 class="logo">easyRent</h1></a>
+            <ul class="nav-menu">
+              <li><a href="">Find Rent/PG</a></li>
+              <li><a href="">Coworking</a></li>
+              <li><a href="">Post Property</a></li>
+              <li><a href=""> My Account </a></li>
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
     <div class="hero">
         <div class="form-box">
-            <div class="button-box">
-                <div id="btn"></div>
-                <button type="button" class="toggle-btn" onclick="login()">Log in    </button>
-                <button type="button" class="toggle-btn" onclick="register()">Register</button> 
-            </div>
-            <form id="login" class="input-group">
-                <input type="text" class="input-field" placeholder="user id" required>
-                <input type="password" class="input-field" placeholder="password" required>
-                <input type="checkbox" class="check-box"> <span>Remember me</span>
-                <button type="submit" class="submit-btn">Log in</button>
-            </form>
-            <form id="register" class="input-group">
-                <input type="text" class="input-field" placeholder="user id" required>
-                <input type="email" class="input-field" placeholder="email id" required>
-                <input type="password" class="input-field" placeholder="password" required>
-                <input type="checkbox" class="check-box"> <span>I agree to Tems and Conditions</span>
-                <button type="submit" class="submit-btn">Register</button>
+            <form action="register.php" method="post">
+                <div class="form-wrapper">
+                    <h1 class="heading">Register with us!</h1>
+                    <div class="input-wrapper">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" required>
+                        
+                        <label for="email_id">Email</label>
+                        <input type="email" name="email_id" required>
+                        
+                        <label for="password">Password</label>
+                        <input type="password" name="password" required>
+                        
+                        <label for="mobile_number">Mobile Number</label>
+                        <input type="number" name="mobile_number" required>
+
+                        <input type="submit" class="btn">
+
+                        <p>Already registered ? <a href="">Login</a></p>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-    <script>
-        var loginForm = document.getElementById("login");
-        var registrationForm = document.getElementById("register");
-        var toggleBtn = document.getElementById("btn");
-
-        function register() {
-            loginForm.style.left="-400px";
-            registrationForm.style.left="50px";
-            toggleBtn.style.left = "110px";
-        }
-
-
-        function login() {
-            loginForm.style.left= "50px";
-            registrationForm.style.left="450px";
-            toggleBtn.style.left = "0px";
-        }
-    </script>
+    <script></script>
 </body>
 </html>
