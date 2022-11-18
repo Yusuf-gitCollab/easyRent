@@ -1,10 +1,8 @@
 <?php 
-    session_start();
-
-    function redirect($url) {
-        header('Location: '.$url);
-        die();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
     }
+    
     
     $con = mysqli_connect("localhost", "root", "deboHarsh@2022", "easyrentdb");
 

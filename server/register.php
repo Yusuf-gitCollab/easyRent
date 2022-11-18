@@ -1,7 +1,7 @@
 <?php 
 
 // php script to set up connection with database
-include("./connection.php");
+require_once('./connection.php');
 $username = "";
 $email = "";
 $mobile_number = "";
@@ -45,9 +45,10 @@ if(isset($_POST['reg_user'])) {
                   VALUES('$uniq_id', '$mobile_number', '$email', '$username', '$password', null) ";
 
         mysqli_query($con, $query);
-        $_SESSION['username'] = $username;
-        $url = 'http://localhost/easyRent/public/';
-        redirect($url);
+        $_SESSION['username'] = $email;
+        $_SESSION['loggedin'] = true;
+        echo "<script>alert('Login Successfully!')</script>";
+        echo "<script>window.location='../public/index.php'</script>";
         
     }else {
         include('./errors.php');
@@ -64,10 +65,11 @@ if(isset($_POST['login_user'])) {
         $query = "SELECT * FROM users WHERE email_id = '$email' AND pwd = '$password'";
         $results = mysqli_query($con, $query);
         if(mysqli_num_rows($results) == 1) {
-            $_SESSION['username'] = $username;
+            $_SESSION['username'] = $email;
             $_SESSION['success'] = "You are now logged in!";
-            $url = 'http://localhost/easyRent/public/';
-            redirect($url);
+            $_SESSION['logedin'] = true;
+            echo "<script>alert('Login Successfully!')</script>";
+            echo "<script>window.location='../public/index.php'</script>";
         }else {
             array_push($errors, "Wrong Email / password combination");
             include('./errors.php');

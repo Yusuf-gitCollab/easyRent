@@ -1,3 +1,8 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+  }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -32,12 +37,34 @@
     <nav>
       <div class="container">
         <div class="navigation">
-          <a href="https://easyrent-ec7d6.web.app/"><h1 class="logo">easyRent</h1></a>
+          <a href="http://localhost/easyRent/public/index.php"><h1 class="logo">easyRent</h1></a>
           <ul class="nav-menu">
             <li><a href="">Find Rent/PG</a></li>
             <li><a href="">Coworking</a></li>
             <li><a href="">Post Property</a></li>
-            <li><a href=""> My Account </a></li>
+            
+            <?php 
+              require('../server/connection.php');
+              if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) :
+            ?>
+              <li>
+                <a href="">
+                  <?php 
+                    $query = mysqli_query($con, "SELECT * FROM `users` WHERE `email_id`='$_SESSION[username]'");
+                    $fetch = mysqli_fetch_array($query);
+                    $str = $fetch['username'];
+                    $str=substr($str, 0, strpos($str, ' '));
+                    echo($str);
+                   ?>
+            
+                </a>
+              </li>
+              <li>
+                <a href="../server/logout.php" class="btn" style="color: white;">Log out</a>
+              </li>
+            <?php else: ?>
+              <li><a href="./pages/login.html" class="btn" style="color: white">Sign in</a></li>
+            <?php endif; ?>
           </ul>
           
         </div>
