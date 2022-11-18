@@ -7,10 +7,21 @@
     overflow: hidden;
 }
 
+p {
+    line-height: 1.6;
+}
+
 .input-box {
     width: 100%;
     position: relative;
     margin: 10px 0;
+}
+
+.reg_log-heading {
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 30px;
 }
 
 input.btn {

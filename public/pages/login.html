@@ -25,29 +25,25 @@
         </div>
       </nav>
     <div class="hero">
-      <h1 class="reg_log-heading">Registration for tenants</h1>
+        <h1 class="reg_log-heading">Login for tenants</h1>
         <div class="form-box">
-            <form action="../../server/register.php" method="post">
+            <form action="../../server/login.php" method="post">
                 <div class="form-wrapper">
-                    <h1 class="heading">Register with us!</h1>
+                    <h1 class="heading">Login</h1>
                     <div class="input-wrapper">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" required>
-                        
-                        <label for="email_id">Email</label>
+                        <label for="email_id">Email:</label>
                         <input type="email" name="email_id" required>
+                        <span>or</span>
+                        <label for="mobile_number">Mobile number:</label>
+                        <input type="text" name="mobile_number" required>
                         
                         <label for="password">Password</label>
                         <input type="password" name="password1" minlength="0" required>
-
-                        <label for="password">Confirm Password</label>
-                        <input type="password" name="password2" minlength="0" required>
-                        
-                        <label for="mobile_number">Mobile Number</label>
-                        <input type="number" name="mobile_number" required>
+                        <p><a href="">Forgot password</a></p>
 
                         <input type="submit" class="btn" name="reg_user">
-                        <p>Already registered ? <a href="./login.html">Login</a></p>
+                       
+                        <p>Not registered ? <a href="./register.html">Create account</a></p>
                     </div>
                 </div>
             </form>
