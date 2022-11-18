@@ -55,5 +55,25 @@ if(isset($_POST['reg_user'])) {
 
 }
 
+if(isset($_POST['login_user'])) {
+    $email = mysqli_real_escape_string($con, $_POST['email_id']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+
+    if(count($errors) == 0) {
+        $password = md5($password);
+        $query = "SELECT * FROM users WHERE email_id = '$email' AND pwd = '$password'";
+        $results = mysqli_query($con, $query);
+        if(mysqli_num_rows($results) == 1) {
+            $_SESSION['username'] = $username;
+            $_SESSION['success'] = "You are now logged in!";
+            $url = 'http://localhost/easyRent/public/';
+            redirect($url);
+        }else {
+            array_push($errors, "Wrong Email / password combination");
+            include('./errors.php');
+        }
+    }
+}
+
 
 ?>

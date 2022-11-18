@@ -6,8 +6,6 @@
         die();
     }
     
-    $_SESSION['message'] = "";
-    
     $con = mysqli_connect("localhost", "root", "deboHarsh@2022", "easyrentdb");
 
     if($con) {
