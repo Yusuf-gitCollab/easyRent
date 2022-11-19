@@ -54,7 +54,7 @@
                     $fetch = mysqli_fetch_array($query);
                     $str = $fetch['username'];
                     $str=substr($str, 0, strpos($str, ' '));
-                    echo($str);
+                    echo"<i class='fa-solid fa-user'></i>"."$str";
                    ?>
             
                 </a>

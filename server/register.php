@@ -46,7 +46,8 @@ if(isset($_POST['reg_user'])) {
 
         mysqli_query($con, $query);
         $_SESSION['username'] = $email;
-        $_SESSION['loggedin'] = true;
+        $_SESSION['logedin'] = true;
+        $_SESSION['success'] = "you are registered";
         echo "<script>alert('Login Successfully!')</script>";
         echo "<script>window.location='../public/index.php'</script>";
         

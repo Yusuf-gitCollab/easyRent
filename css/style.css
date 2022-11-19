@@ -128,6 +128,10 @@ nav {
     color: var(--black);
 }
 
+.nav-menu li a:hover {
+    color: var(--theme-color);
+}
+
 header {
     height: 37.5rem;
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(194, 190, 190, 0.158) 100%), url("https://images.pexels.com/photos/5847564/pexels-photo-5847564.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load");
