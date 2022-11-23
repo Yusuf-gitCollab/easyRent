@@ -103,6 +103,7 @@ img {
 nav {
     background: var(--white);
     height: 4.375rem;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.4);
 }
 
 .logo {

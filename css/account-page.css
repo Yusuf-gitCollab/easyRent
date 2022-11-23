@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.landlord-account-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-header {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgb(247,108,162);
+    background: linear-gradient(121deg, rgba(247,108,162,1) 2%, rgba(246,143,112,1) 66%, rgba(249,223,245,1) 93%);
+    color: #fff;
+    border-radius: 16px;
+    /* box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.4); */
+    margin: 20px 0;
+}
+
+.profile-img.view {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-basic-info {
+    line-height: 1.6;
+}
+
+.personal-details-div,
+.appartment-info-div,
+.appartment-tenant-div {
+    padding: 20px;
+    border-radius: 16px;
+    background: rgb(248, 248, 248);
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper {
+    display: flex;
+}
+
+.input-wrapper div {
+    margin: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px 10px 10px;
+    outline: none;
+    border: 1px solid rgb(141, 140, 140);
+    font-size: 18px;
+    z-index: 2;
+    margin: 10px 0;
+}
+
+input.view {
+    background: none;
+}

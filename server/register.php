@@ -80,36 +80,75 @@ if(isset($_POST['login_user'])) {
 
 
 if(isset($_POST['reg_landlord'])) {
-    echo "we are in register landlord";
-    $username = mysqli_real_escape_string($con, $_POST['name']);
-    $email = mysqli_real_escape_string($con, $_POST['email_id']);
-    $pwd1 = mysqli_real_escape_string($con, $_POST['password1']);
-    $pwd2 = mysqli_real_escape_string($con, $_POST['password2']);
-    $mobile_number = mysqli_real_escape_string($con, $_POST['mobile_number']);
-
-
-    if($pwd1 != $pwd2) {
-        echo "<script>alert('Passwords do not match') </script>";
-        echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
+    $allowTypes = array('jpg','png','jpeg','gif','pdf');
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    echo "$target_file";
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+    // check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - ".$check["mime"];
+    }else {
+        echo "<script> alter('File is not an image') </script>";
     }
 
-    $user_check_query = "SELECT * FROM landlord WHERE landlord_name = '$username' OR email_id = '$email' LIMIT 1";
-    $result = mysqli_query($con, $user_check_query);
-    $user = mysqli_fetch_assoc($result);
-
-    if($user) {
-
+    // check file size
+    if($_FILES["fileToUpload"]["size"] > 500000) {
+        echo "<script> alter('File is too big an image') </script>";
     }
 
-    if(count($errors) == 0) {
-        $password = md5($pwd1);
-        $uniq_id = uniqid($mobile_number);
-
-        $query = "INSERT INTO landlord (landlord_id, appartment_id, landlord_name, appartment_name, appartment_type, )
-                  VALUES()";
-
-        mysqli_query($con, $query);
+    if(!in_array($imageFileType, $allowTypes)) {
+        echo "<script> alter('Sorry only JPG, JPEG, PNG & GIF files are allowed') </script>";
     }
+
+    if(count($errors)  ==0) {
+        if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            $insert = $con -> query("INSERT INTO images (file_name) VALUES ('$target_file')");
+            if($insert) {
+                echo "succesfull";
+            }else {
+                echo "wth";
+            }
+        }else {
+            echo "sorry there was an error in uploading. Try again";
+        }
+    }
+    
+
+    $username = mysqli_real_escape_string($con, $_POST['landlord_name']);
+    $location = mysqli_real_escape_string($con, $_POST['location']);
+    // $email = mysqli_real_escape_string($con, $_POST['email_id']);
+    // $pwd1 = mysqli_real_escape_string($con, $_POST['password1']);
+    // $pwd2 = mysqli_real_escape_string($con, $_POST['password2']);
+    // $mobile_number = mysqli_real_escape_string($con, $_POST['mobile_number']);
+
+
+    // if($pwd1 != $pwd2) {
+    //     echo "<script>alert('Passwords do not match') </script>";
+    //     echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
+    // }
+
+    // $user_check_query = "SELECT * FROM landlord WHERE landlord_name = '$username' OR email_id = '$email' LIMIT 1";
+    // $result = mysqli_query($con, $user_check_query);
+    // $user = mysqli_fetch_assoc($result);
+
+    // if($user) {
+
+    // }
+
+    // if(count($errors) == 0) {
+    //     $password = md5($pwd1);
+    //     $uniq_id = uniqid($mobile_number);
+
+    //     $query = "INSERT INTO landlord (landlord_id, appartment_id, landlord_name, appartment_name, appartment_type, )
+    //               VALUES()";
+
+    //     mysqli_query($con, $query);
+    // }
+
+
  
 }
 
