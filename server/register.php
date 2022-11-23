@@ -79,4 +79,38 @@ if(isset($_POST['login_user'])) {
 }
 
 
+if(isset($_POST['reg_landlord'])) {
+    echo "we are in register landlord";
+    $username = mysqli_real_escape_string($con, $_POST['name']);
+    $email = mysqli_real_escape_string($con, $_POST['email_id']);
+    $pwd1 = mysqli_real_escape_string($con, $_POST['password1']);
+    $pwd2 = mysqli_real_escape_string($con, $_POST['password2']);
+    $mobile_number = mysqli_real_escape_string($con, $_POST['mobile_number']);
+
+
+    if($pwd1 != $pwd2) {
+        echo "<script>alert('Passwords do not match') </script>";
+        echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
+    }
+
+    $user_check_query = "SELECT * FROM landlord WHERE landlord_name = '$username' OR email_id = '$email' LIMIT 1";
+    $result = mysqli_query($con, $user_check_query);
+    $user = mysqli_fetch_assoc($result);
+
+    if($user) {
+
+    }
+
+    if(count($errors) == 0) {
+        $password = md5($pwd1);
+        $uniq_id = uniqid($mobile_number);
+
+        $query = "INSERT INTO landlord (landlord_id, appartment_id, landlord_name, appartment_name, appartment_type, )
+                  VALUES()";
+
+        mysqli_query($con, $query);
+    }
+ 
+}
+
 ?>

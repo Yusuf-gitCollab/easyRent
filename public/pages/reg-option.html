@@ -40,22 +40,21 @@
         .btn-outline:hover {
             box-shadow: 25px -16px 0px 0px  #fc4768;
             transform: translateY(-10px);
+            text-align: center;
+        }
+
+        a {
+            text-align: center;
+            text-decoration: none;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="hero">
         <div class="center-frame">
-            <button  class="btn-outline user-reg">Register for Tenant</button>
-            <button class="btn-outline landlord-reg">Register for Landlord</button>
+            <a href="./register.html"  class="btn-outline user-reg">Register for Tenant</a>
+            <a href="./landlord-reg.php" class="btn-outline landlord-reg">Register for Landlord</a>
         </div>
     </div>
-    <script>
-        var userReg = document.getElementsByClassName('user-reg')[0];
-        var landlordReg = document.getElementsByClassName('landlord-reg')[0];
-
-        userReg.addEventListener('click', ()=> {
-            location.href="./register.html";
-        })
-    </script>
 </body>
