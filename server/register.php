@@ -155,6 +155,7 @@ if(isset($_POST['reg_landlord'])) {
         $_SESSION['username'] = $email;
         $_SESSION['success'] = "You are now logged in!";
         $_SESSION['logedin'] = true;
+        $_SESSION['edit-profile'] = false;
     }
 
     // for getting the appartment photos:
@@ -185,11 +186,11 @@ if(isset($_POST['reg_landlord'])) {
         $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
         $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
         $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
+        $uploadOk = false;
     
         if(!empty($insertValuesSQL)) {
             $insertValuesSQL = trim($insertValuesSQL, ',');
             // insert image file name into the database
-            echo "$insertValuesSQL";
             $insert = $con -> query("INSERT INTO images (file_name, app_ref) VALUES $insertValuesSQL");
             if($insert){ 
                 $statusMsg = "Files are uploaded successfully.".$errorMsg; 
@@ -204,7 +205,7 @@ if(isset($_POST['reg_landlord'])) {
         $statusMsg = "please select file to upload";
     }
 
-     echo "$statusMsg";
+    header('Location: http://localhost/easyRent/public/pages/landlord-reg.php');
  
 }
 
@@ -233,6 +234,38 @@ if(isset($_POST['login_landlord'])) {
 if(isset($_POST['logout_landlord'])) {
     echo "<script> alert('You are successfully logged out') </script>";
     require_once('./logout.php');
+}
+
+if(isset($_POST['delete_landlord'])) {
+    $email_id = $_SESSION['username'];
+    $result = mysqli_fetch_assoc(mysqli_query($con, "SELECT mobile_number FROM landlord WHERE email_id = '$email_id'"));
+    $mobile_number = $result['mobile_number'];
+    $query = "DELETE FROM images WHERE app_ref = '$mobile_number'";
+    mysqli_query($con, $query);
+
+    $query = "DELETE FROM landlord WHERE mobile_number = '$mobile_number'";
+    mysqli_query($con, $query);
+    echo "<script> alert('Sorry to see you go. Your Accont has been deleted permanantly') </script>";
+    require_once('./logout.php');
+
+}
+
+if(isset($_POST['edit_landlord'])){
+    $_SESSION['edit-profile'] = true;
+    header('Location: http://localhost/easyRent/public/pages/landlord-reg.php');
+    exit();
+}
+
+if(isset($_POST['resave_landlord'])) {
+    $_SESSION['edit-profile'] = false;
+    header('Location: http://localhost/easyRent/public/pages/landlord-reg.php');
+    exit();
+}
+
+if(isset($_POST['cancel_edit_landlord'])) {
+    $_SESSION['edit-profile'] = false;
+    header('Location: http://localhost/easyRent/public/pages/landlord-reg.php');
+    exit();
 }
 
 ?>

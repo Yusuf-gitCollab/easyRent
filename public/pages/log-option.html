@@ -41,25 +41,19 @@
             box-shadow: 25px -16px 0px 0px  #fc4768;
             transform: translateY(-10px);
         }
+
+        a {
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <div class="hero">
         <div class="center-frame">
-            <button class="btn-outline user-log">Login for Tenant</button>
-            <button class="btn-outline landlord-log">Login for Landlord</button>
+            <a href="./login.html"  class="btn-outline user-reg">Login for Tenant</a>
+            <a href="./landlord-login.php" class="btn-outline landlord-reg">Login for Landlord</a>
         </div>
     </div>
-    <script>
-        var userLog = document.getElementsByClassName('user-log')[0];
-        var landlordLog = document.getElementsByClassName('landlord-log')[0];
-
-        userLog.addEventListener('click', ()=> {
-            window.location = "./login.html";
-        });
-
-        landlordLog.addEventListener('click', ()=> {
-            window.location = "./login.html";
-        })
-    </script>
 </body>

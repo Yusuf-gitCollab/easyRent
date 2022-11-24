@@ -58,7 +58,7 @@
                 <a href="../server/logout.php" class="btn" style="color: white;">Log out</a>
               </li>
             <?php else: ?>
-              <li><a href="./pages/login.html" class="btn" style="color: white">Sign in</a></li>
+              <li><a href="./pages/log-option.html" class="btn" style="color: white">Sign in</a></li>
             <?php endif; ?>
           </ul>
           
@@ -107,8 +107,8 @@
               in you desired locations and affordable prices from the comfort of your
               house.
             </p>
-            <a href="./pages/register.html" class="btn">Register</a>
-            <a href="./pages/login.html" class="btn">Sign in</a> 
+            <a href="./pages/reg-option.html" class="btn">Register</a>
+            <a href="./pages/log-option.html" class="btn">Sign in</a> 
           </div>
         </div>
       </div>
