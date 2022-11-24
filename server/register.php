@@ -38,7 +38,7 @@ if(isset($_POST['reg_user'])) {
     }
 
     if(count($errors) == 0) {
-        $password = md5($pwd1); // encrypt the password before saving
+        $password = $pwd1; // encrypt the password before saving
         $uniq_id = uniqid("$mobile_number");
 
         $query = "INSERT INTO users (userid, mobile_number, email_id, username, pwd, appartment_id) 
@@ -62,7 +62,7 @@ if(isset($_POST['login_user'])) {
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
     if(count($errors) == 0) {
-        $password = md5($password);
+    
         $query = "SELECT * FROM users WHERE email_id = '$email' AND pwd = '$password'";
         $results = mysqli_query($con, $query);
         if(mysqli_num_rows($results) == 1) {
@@ -143,14 +143,18 @@ if(isset($_POST['reg_landlord'])) {
 
     // insert data into landlord table as images table id is a foreign key referncing the mobile number of landlord table
     if(count($errors) == 0) {
-        $password = md5($pwd1);
+
+        echo "$pwd";
         $appartment_id = uniqid($mobile_number);
         $query = "INSERT INTO landlord (appartment_id, landlord_name, appartment_name, appartment_type, appartment_number
         , appartment_rent, landlord_pwd, email_id, mobile_number, profile_pic, landlord_location, appartment_location, app_fac )
                   VALUES('$appartment_id', '$username', '$appartment_name', '$appartment_type', '$appartment_number', '$appartment_rent', 
-        '$password', '$email', '$mobile_number', '$target_file', '$location', '$appartment_location', '$appartment_facilities' )";
+        '$pwd', '$email', '$mobile_number', '$target_file', '$location', '$appartment_location', '$appartment_facilities' )";
         echo "$query";
         mysqli_query($con, $query);
+        $_SESSION['username'] = $email;
+        $_SESSION['success'] = "You are now logged in!";
+        $_SESSION['logedin'] = true;
     }
 
     // for getting the appartment photos:
@@ -202,6 +206,33 @@ if(isset($_POST['reg_landlord'])) {
 
      echo "$statusMsg";
  
+}
+
+if(isset($_POST['login_landlord'])) {
+    $email = mysqli_real_escape_string($con, $_POST['email_id']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+
+    if(count($errors) == 0) {
+
+        $query = "SELECT * FROM landlord WHERE email_id = '$email' AND landlord_pwd = '$password'";
+        $results = mysqli_query($con, $query);
+        if(mysqli_num_rows($results) == 1) {
+            $_SESSION['username'] = $email;
+            $_SESSION['success'] = "You are now logged in!";
+            $_SESSION['logedin'] = true;
+            $_SESSION['edit-profile'] = false;
+            echo "<script>alert('Login Successfully!')</script>";
+            echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
+        }else {
+            array_push($errors, "Wrong Email / password combination");
+            include('./errors.php');
+        }
+    }
+}
+
+if(isset($_POST['logout_landlord'])) {
+    echo "<script> alert('You are successfully logged out') </script>";
+    require_once('./logout.php');
 }
 
 ?>

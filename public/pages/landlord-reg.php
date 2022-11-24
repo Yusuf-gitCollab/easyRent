@@ -1,8 +1,28 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-  $_SESSION['edit-profile'] = false;
+
+require('../../server/connection.php');
+
+$_SESSION['edit-profile'] = false;
+if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true){
+  $email_id = $_SESSION['username'];
+
+  $query = "SELECT * FROM landlord WHERE email_id = '$email_id' LIMIT 1";
+  $result = mysqli_query($con, $query);
+  $user = mysqli_fetch_assoc($result);
+  // var_dump($user);
+  $landlord_name = $user['landlord_name'];
+  $landlord_phone = $user['mobile_number'];
+  $landlord_pwd = $user['landlord_pwd'];
+  $appartment_name = $user['appartment_name'];
+  $appartment_number  = $user['appartment_number'];
+  $appartment_location = $user['appartment_location'];
+  $appartment_rent = $user['appartment_rent'];
+  $appartment_type = $user['appartment_type'];
+  $landlord_location = $user['landlord_location'];
+  $app_fac = $user['app_fac'];
+
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,8 +79,8 @@ if (session_status() === PHP_SESSION_NONE) {
             <!---------------------------------------- PROFILE BASIC INFO ------------------------------------>
             <div class="profile-basic-info">
               <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-              <h1> Cha Eun Woo </h1>
-              <h2> Gunpo, Gyeonggi Province, India </h2>
+              <h1> <?php echo "$landlord_name" ?> </h1>
+              <h2> <?php echo "$landlord_location" ?> </h2>
               <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
 
               <?php else: ?>
@@ -77,7 +97,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Email: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" name="email_id" type="text" placeholder="harsh1.5lacs@gmail.com" readonly>
+                  <input class="view" name="email_id" type="text" value='<?php echo "$email_id" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                   
                 <?php else: ?>
@@ -88,7 +108,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Phone: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" type="number" name="mobile_number" placeholder="6000295281" readonly>
+                  <input class="view" type="number" name="mobile_number" value='<?php echo "$landlord_phone" ?>'readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                   
                 <?php else: ?>
@@ -101,7 +121,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Password: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" name="password" type="password" placeholder="********" readonly>
+                  <input class="view" name="password" type="password" value='<?php echo "$landlord_pwd" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                   
                 <?php else: ?>
@@ -117,7 +137,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Appartment Name: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" type="text" placeholder="harsh1.5lacs@gmail.com" readonly>
+                  <input class="view" type="text" value='<?php echo "$appartment_name" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                 
                 <?php else: ?>
@@ -127,7 +147,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Appartment Number: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" type="text" placeholder="harsh1.5lacs@gmail.com" readonly>
+                  <input class="view" type="text" value='<?php echo "$appartment_number" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                 
                 <?php else: ?>
@@ -140,7 +160,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Location: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" type="text" placeholder="harsh1.5lacs@gmail.com" readonly>
+                  <input class="view" value='<?php echo "$appartment_location" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                 
                 <?php else: ?>
@@ -150,7 +170,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Appartment Rent: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" type="text" placeholder="harsh1.5lacs@gmail.com" readonly>
+                  <input class="view" type="text" value='<?php echo "$appartment_rent" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                 
                 <?php else: ?>
@@ -163,7 +183,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Appartment Type: </label>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <input class="view" type="text" placeholder="harsh1.5lacs@gmail.com" readonly>
+                  <input class="view" type="text" value='<?php echo "$appartment_type" ?>' readonly>
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                 
                 <?php else: ?>
@@ -173,11 +193,11 @@ if (session_status() === PHP_SESSION_NONE) {
               <div>
                 <label for="name">Facilities: </label> <br/>
                 <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-                  <textarea class="view" type="text" placeholder="harsh1.5lacs@gmail.com" readonly> </textarea>
+                  <input class="view" type="text" value='<?php echo "$app_fac" ?>' readonly> 
                 <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
                 
                 <?php else: ?>
-                  <textarea type="text" name="app_fac" placeholder="eg: 2 Balconies, Hall" required> </textarea>
+                  <input type="text" name="app_fac" placeholder="eg: 2 Balconies, Hall" required> 
                 <?php endif ?>
               </div>
             </div> <!---------------- INPUT WRAPPER INSIDE Appartment INFO DIV ---------------->
@@ -187,9 +207,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <div class="appartment-photo-section">
             <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?> 
               <!--- this is executed when the user is signed in -->
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkmQL4_XePw5_yIHPkzc0lfb8FesWP4TR9MQ&usqp=CAU"
-                alt="">
+              
               <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
               <!-- this is executed when the user is loged in but wants to edit his / her profile -->
               <?php else: ?>
@@ -200,9 +218,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
           <div class="button-div">
             <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-              <input type="submit"  class="Edit" name="edit_landlord">
+              <input type="submit"  value="Edit" class="btn" name="edit_landlord">
+              <input type="submit"  value="Log Out" class="btn" name="logout_landlord">
+              <input type="submit"  value="Delete Account" class="btn" name="delete_landlord">
             <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
-              <input type="submit" class="Save" name="resave_landlord">
+              <input type="submit" value="Save" name="resave_landlord">
             <?php else: ?>
               <input type="submit" value="Register" class="btn" name="reg_landlord">
             <?php endif ?>
