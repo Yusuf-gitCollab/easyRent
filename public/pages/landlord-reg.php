@@ -247,7 +247,7 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true){
               <!-- this is executed when the user is loged in but wants to edit his / her profile -->
               <?php else: ?>
               <label for="fileToUpload"> Upload Appartment Images(Recommended) </label>
-              <input type="file" name="files[]" id="fileToUpload" multiple>
+              <input type="file" name="appartment_images[]" id="fileToUpload" multiple>
             <?php endif ?>
           </div>
 
