@@ -308,6 +308,7 @@ if(isset($_POST['edit_landlord'])){
 }
 
 if(isset($_POST['resave_landlord'])) {
+    // first delete the previus info from the databse
     
     $_SESSION['edit-profile'] = false;
     header('Location: http://localhost/easyRent/public/pages/landlord-reg.php');

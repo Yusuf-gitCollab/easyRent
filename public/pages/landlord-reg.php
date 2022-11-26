@@ -335,9 +335,9 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
 
           <div class="button-div">
             <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
-              <input type="submit"  value="Edit" class="btn" name="edit_landlord">
+              <!-- <input type="submit"  value="Edit" class="btn" name="edit_landlord"> -->
               <input type="submit"  value="Log Out" class="btn" name="logout_landlord">
-              <input type="submit"  value="Delete Account" class="btn" name="delete_landlord">
+              <!-- <input type="submit"  value="Delete Account" class="btn" name="delete_landlord"> -->
             <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
               <input type="submit" value="Save" class="btn" name="resave_landlord">
               <input type="submit" value="Cancel" class="btn" name="cancel_edit_landlord">
