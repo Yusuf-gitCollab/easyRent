@@ -34,9 +34,8 @@
         <div class="navigation">
           <a href="http://localhost/easyRent/public/index.php"><h1 class="logo">easyRent</h1></a>
           <ul class="nav-menu">
-            <li><a href="">Find Rent/PG</a></li>
-            <li><a href="">Coworking</a></li>
-            <li><a href="">Post Property</a></li>
+            <li><a href="./pages/search-page.html">Find Rent/PG</a></li>
+            <li><a href="./pages/landlord-reg.php">Post Property</a></li>
             
             <?php 
               require('../server/connection.php');
@@ -81,8 +80,7 @@
           <form>
             <div class="card">
               <div class="option-div">
-                <button type="button" role="tab" data-state="active" class="tab">Coworking</button>
-                <button type="button" role="tab" data-state="" class="tab">Paying Guest</button>
+                <button type="button" role="tab" data-state="active" class="tab">Paying Guest</button>
                 <button type="button" role="tab" data-state="" class="tab">Rent</button>
               </div>
               <div class="search-div">
