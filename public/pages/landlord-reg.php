@@ -1,7 +1,12 @@
 <?php
 
 require('../../server/connection.php');
-if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true){
+if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SESSION['usertype']) and $_SESSION['usertype'] != "landlord"))){
+  session_destroy();
+  session_start();
+}
+
+if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SESSION['usertype']) and $_SESSION['usertype'] == "landlord"))){
   $email_id = $_SESSION['username'];
 
   $query = "SELECT * FROM landlord WHERE email_id = '$email_id' LIMIT 1";
@@ -51,13 +56,21 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true){
               if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) :
             ?>
               <li>
-                <a href="">
+                <a href="<?php echo ($_SESSION['usertype'] == 'landlord') ?  '#' : './user-profile.php' ?>">
                   <?php 
-                    $query = mysqli_query($con, "SELECT * FROM `users` WHERE `email_id`='$_SESSION[username]'");
-                    $fetch = mysqli_fetch_array($query);
-                    $str = $fetch['username'];
-                    $str=substr($str, 0, strpos($str, ' '));
-                    echo"<i class='fa-solid fa-user'></i>"."$str";
+                    if(isset($_SESSION['usertype']) and $_SESSION['usertype'] == "tenant") {
+                      $query = mysqli_query($con, "SELECT * FROM `users` WHERE `email_id`='$_SESSION[username]'");
+                      $fetch = mysqli_fetch_array($query);
+                      $str = $fetch['username'];
+                      $str=substr($str, 0, strpos($str, ' '));
+                      echo"<i class='fa-solid fa-user'></i>"."$str";
+                    }else if(isset($_SESSION['usertype']) and $_SESSION['usertype'] == "landlord") {
+                      $query = mysqli_query($con, "SELECT * FROM `landlord` WHERE `email_id`='$_SESSION[username]'");
+                      $fetch = mysqli_fetch_array($query);
+                      $str = $fetch['landlord_name'];
+                      $str=substr($str, 0, strpos($str, ' '));
+                      echo"<i class='fa-solid fa-user'></i>"."$str";
+                    }
                    ?>
             
                 </a>
@@ -235,14 +248,14 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true){
 
                 if($result->num_rows > 0) {
                   while($row = $result -> fetch_assoc()) {
-                    $img_url = './uploads/'.$row["file_name"];
-                      echo "$img_url"."<br>";
+                    $img_url = '../../server/uploads/'.$row["file_name"];
                       echo "<img src='$img_url' />" ;           
                   }
+                }else {
+                  echo "Images were not uploaded. Please upload images by clicking the edit button below.";
                 }
-
+                  
                 ?>
-                <img src="./uploads/Screenshot (2).png">
               <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
               <!-- this is executed when the user is loged in but wants to edit his / her profile -->
               <?php else: ?>

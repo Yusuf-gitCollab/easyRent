@@ -43,13 +43,21 @@
               if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) :
             ?>
               <li>
-                <a href="">
+                <a href="<?php echo ($_SESSION['usertype'] == 'landlord') ?  './pages/landlord-reg.php' : './pages/user-profile.php' ?>">
                   <?php 
-                    $query = mysqli_query($con, "SELECT * FROM `users` WHERE `email_id`='$_SESSION[username]'");
-                    $fetch = mysqli_fetch_array($query);
-                    $str = $fetch['username'];
-                    $str=substr($str, 0, strpos($str, ' '));
-                    echo"<i class='fa-solid fa-user'></i>"."$str";
+                    if(isset($_SESSION['usertype']) and $_SESSION['usertype'] == "tenant") {
+                      $query = mysqli_query($con, "SELECT * FROM `users` WHERE `email_id`='$_SESSION[username]'");
+                      $fetch = mysqli_fetch_array($query);
+                      $str = $fetch['username'];
+                      $str=substr($str, 0, strpos($str, ' '));
+                      echo"<i class='fa-solid fa-user'></i>"."$str";
+                    }else if(isset($_SESSION['usertype']) and $_SESSION['usertype'] == "landlord") {
+                      $query = mysqli_query($con, "SELECT * FROM `landlord` WHERE `email_id`='$_SESSION[username]'");
+                      $fetch = mysqli_fetch_array($query);
+                      $str = $fetch['landlord_name'];
+                      $str=substr($str, 0, strpos($str, ' '));
+                      echo"<i class='fa-solid fa-user'></i>"."$str";
+                    }
                    ?>
             
                 </a>

@@ -18,6 +18,9 @@ if(isset($_POST['reg_user'])) {
 
     if($pwd1 != $pwd2) {
         array_push($errors, "Passwords don't match. Please make sure that password and confirm password are both same");
+        echo "<script> alert('passwords do not match. Please retype. ') </script>";
+        echo "<script> history.back(); </script>";
+        die();
     }
     
    $user_check_query = "SELECT * FROM users WHERE username ='$username' OR email_id='$email' LIMIT 1";
@@ -28,10 +31,16 @@ if(isset($_POST['reg_user'])) {
     if($user) {
         if($user['mobile_number'] === $mobile_number) {
             array_push($errors, "Mobile number already registered.");
+            echo "<script> alert('Mobile number already registered. Login instead!') </script>";
+            echo "<script> history.back(); </script>";
+            die();
         }
 
         if($user['email_id'] === $email) {
             array_push($errors, "Email already exists registered.");
+            echo "<script> alert('Email already registered. Login instead!') </script>";
+            echo "<script> history.back(); </script>";
+            die();
         }
 
         array_push($errors, "Looks like you are already registered. Try logging in or create new account with another mobile number and email address");
@@ -44,15 +53,29 @@ if(isset($_POST['reg_user'])) {
         $query = "INSERT INTO users (userid, mobile_number, email_id, username, pwd, appartment_id) 
                   VALUES('$uniq_id', '$mobile_number', '$email', '$username', '$password', null) ";
 
-        mysqli_query($con, $query);
-        $_SESSION['username'] = $email;
-        $_SESSION['logedin'] = true;
-        $_SESSION['success'] = "you are registered";
-        echo "<script>alert('Login Successfully!')</script>";
-        echo "<script>window.location='../public/index.php'</script>";
-        
+        if(mysqli_query($con, $query)) {
+            if(isset($_SESSION['usertype']) and  $_SESSION['usertype'] == "landlord") {
+                session_destroy();
+                session_start();
+            }
+
+            $_SESSION['username'] = $email;
+            $_SESSION['logedin'] = true;
+            $_SESSION['success'] = "you are registered";
+            $_SESSION['usertype'] = "tenant";
+            
+            echo "<script>alert('Login Successfully!')</script>";
+            echo "<script>window.location='../public/index.php'</script>";
+            die();
+        }else {
+            echo "<script> alert('woops some error occured. Please try again or contact support team.') </script>";
+            echo "<script> history.back(); </script>";
+            die();
+        }
     }else {
-        include('./errors.php');
+        echo "<script> alert('woops some error occured. Please try again or contact support team.') </script>";
+        echo "<script> history.back(); </script>";
+        die();
     }
 
 }
@@ -62,18 +85,24 @@ if(isset($_POST['login_user'])) {
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
     if(count($errors) == 0) {
-    
+        echo "$password";
         $query = "SELECT * FROM users WHERE email_id = '$email' AND pwd = '$password'";
         $results = mysqli_query($con, $query);
         if(mysqli_num_rows($results) == 1) {
+            if(isset($_SESSION['usertype']) and  $_SESSION['usertype'] == "landlord") {
+                session_destroy();
+                session_start();
+            }
             $_SESSION['username'] = $email;
             $_SESSION['success'] = "You are now logged in!";
             $_SESSION['logedin'] = true;
+            $_SESSION['usertype'] = "tenant";
             echo "<script>alert('Login Successfully!')</script>";
             echo "<script>window.location='../public/index.php'</script>";
         }else {
-            array_push($errors, "Wrong Email / password combination");
-            include('./errors.php');
+            echo "<script> alert('Wrong email or password combination. Please try again') </script>";
+            echo "<script> history.back(); </script>";
+            die();
         }
     }
 }
@@ -147,12 +176,20 @@ if(isset($_POST['reg_landlord'])) {
                   VALUES('$appartment_id', '$username', '$appartment_name', '$appartment_type', '$appartment_number', '$appartment_rent', 
         '$pwd', '$email', '$mobile_number', '$target_file', '$location', '$appartment_location', '$appartment_facilities' )";
         echo "$query";
-        mysqli_query($con, $query);
-        $_SESSION['username'] = $email;
-        $_SESSION['success'] = "You are now logged in!";
-        $_SESSION['logedin'] = true;
-        $_SESSION['usertype'] = "landlord";
-        $_SESSION['edit-profile'] = false;
+        if(mysqli_query($con, $query)) {
+            if(isset($_SESSION['usertype']) and  $_SESSION['usertype'] == "tenant") {
+                session_destroy();
+                session_start();
+            }
+            $_SESSION['username'] = $email;
+            $_SESSION['success'] = "You are now logged in!";
+            $_SESSION['logedin'] = true;
+            $_SESSION['usertype'] = "landlord";
+            $_SESSION['edit-profile'] = false;
+        }else {
+            echo "<script> alert('woops some error occured. Please try again or contact support team.') </script>";
+            echo "<script> history.back(); </script>";
+        }
     }
 
     // for getting the appartment photos:
@@ -212,29 +249,31 @@ if(isset($_POST['login_landlord'])) {
     $email = mysqli_real_escape_string($con, $_POST['email_id']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
-    if(count($errors) == 0) {
-
-        $query = "SELECT * FROM landlord WHERE email_id = '$email' AND landlord_pwd = '$password'";
-        $results = mysqli_query($con, $query);
-        if(mysqli_num_rows($results) == 1) {
-            $_SESSION['username'] = $email;
-            $_SESSION['success'] = "You are now logged in!";
-            $_SESSION['logedin'] = true;
-            $_SESSION['edit-profile'] = false;
-            $_SESSION['usertype'] = "landlord";
-            echo "<script>alert('Login Successfully!')</script>";
-            echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
-        }else {
-            array_push($errors, "Wrong Email / password combination");
-            echo "<script> alert('$errors') </script>";
-            echo "<script> history.back(); </script>";
+    $query = "SELECT * FROM landlord WHERE email_id = '$email' AND landlord_pwd = '$password'";
+    $results = mysqli_query($con, $query);
+    if(mysqli_num_rows($results) == 1) {
+        if(isset($_SESSION['usertype']) and  $_SESSION['usertype'] == "tenant") {
+            session_destroy();
+            session_start();
         }
+        $_SESSION['username'] = $email;
+        $_SESSION['success'] = "You are now logged in!";
+        $_SESSION['logedin'] = true;
+        $_SESSION['edit-profile'] = false;
+        $_SESSION['usertype'] = "landlord";
+        echo "<script>alert('Login Successfully!')</script>";
+        echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
+    }else {
+        array_push($errors, "Wrong Email / password combination");
+        echo "<script> alert('wrong email or password combination. Try again or create a new account.') </script>";
+        echo "<script> history.back(); </script>";
     }
+    
 }
 
 if(isset($_POST['logout_landlord'])) {
     echo "<script> alert('You are successfully logged out') </script>";
-    require_once('./logout.php');
+    echo"<scrip> window.location.href('./logout.php') </script>";
 }
 
 if(isset($_POST['delete_landlord'])) {

@@ -40,8 +40,7 @@ img {
 
 .personal-details-div,
 .appartment-info-div,
-.appartment-tenant-div,
-.appartment-photo-section {
+.appartment-tenant-div {
     padding: 20px;
     border-radius: 16px;
     background: rgb(248, 248, 248);
