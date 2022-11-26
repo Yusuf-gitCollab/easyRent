@@ -23,7 +23,24 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
   $appartment_type = $user['appartment_type'];
   $landlord_location = $user['landlord_location'];
   $app_fac = $user['app_fac'];
+  $profile_pic = $user['profile_pic'];
 
+  // tenant information
+  $tenant_id = $user['tenant_id'];
+  $appartment_occupied = $user['appartment_occupied'];
+  
+  // query tenant database
+  $query = "SELECT * FROM users WHERE email_id = '$tenant_id'";
+  $result = mysqli_fetch_assoc(mysqli_query($con, $query));
+  // var_dump($result);
+  $tenant_name = $result['username'];
+  $tenant_email = $result['email_id'];
+  $tenant_phone = $result['mobile_number'];
+  $tenant_start_date = $result['start_date'];
+  $tenant_end_date = $result['end_date'];
+  $payable_amt = $result['payable_amt'];
+  $start_date = $result['start_date'];
+  $end_date = $result['end_date'];
 }
 
 ?>
@@ -94,13 +111,20 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
           <div class="account-header">
             <!------------------------------ PROFILE IMAGE DIV -------------------------------------->
             <div
-              class="profile-img <?php echo ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true)) ? 'view' : '' ?>">
+              class="profile-img <?php echo (isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and $profile_pic !== null) ? 'view' : '' ?>">
 
               <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?> 
               <!--- this is executed when the user is signed in -->
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkmQL4_XePw5_yIHPkzc0lfb8FesWP4TR9MQ&usqp=CAU"
-                alt="">
+                <?php
+                  if($profile_pic !== null) {
+                    $img_path = "../../server".$profile_pic;
+                    echo "$img_path";
+                    echo "<img src='$img_path' alt='profile image'>";
+                  }else {
+                    echo "upload profile image";
+                  }
+                
+                ?>
               <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
               <!-- this is executed when the user is loged in but wants to edit his / her profile -->
               <?php else: ?>
@@ -237,6 +261,51 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
       
           </div> <!--- APPRATMENT INFO DIV ENDS ---------------->
 
+          <!-- ------------------------------------- TENANT INFO DIV---------------------------------------- -->
+          <div class="tenant-info">
+            <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>
+                <?php if($appartment_occupied == 1) : ?>
+                  <div class="input-wrapper">
+                      <div>
+                        <label for="name">Tenant Name: </label>
+                          <input class="view" value='<?php echo "$tenant_name" ?>' readonly>
+                      </div>
+                      <div>
+                        <label for="name">Tenant email: </label>
+                          <input class="view" type="text" value='<?php echo "$tenant_email" ?>' readonly>
+                      </div>
+                  </div>
+
+                  <div class="input-wrapper">
+                      <div>
+                        <label for="name">Tenant Phone: </label>
+                          <input class="view" value='<?php echo "$tenant_phone" ?>' readonly>
+                      </div>
+                  </div>
+
+                  <div class="input-wrapper">
+                      <div>
+                        <label for="name">Start date: </label>
+                          <input class="view" value='<?php echo "$tenant_start_date" ?>' readonly>
+                      </div>
+                      <div>
+                        <label for="name">End date: </label>
+                          <input class="view" type="text" value='<?php echo "$tenant_end_date" ?>' readonly>
+                      </div>
+                  </div>
+
+                  <div class="input-wrapper">
+                      <div>
+                        <label for="name">Amount Payable: </label>
+                          <input class="view" value='<?php echo "$payable_amt" ?>' readonly>
+                      </div>
+                  </div>
+                <?php else : ?>
+                      <p> No tenant yet </p>
+                <?php endif ?>
+            <?php endif ?>
+          </div>
+
           <div class="appartment-photo-section">
             <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?> 
               <!--- this is executed when the user is signed in -->
@@ -249,7 +318,7 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
                 if($result->num_rows > 0) {
                   while($row = $result -> fetch_assoc()) {
                     $img_url = '../../server/uploads/'.$row["file_name"];
-                      echo "<img src='$img_url' />" ;           
+                      echo "<img src='$img_url'  class='appartment-images'/>" ;           
                   }
                 }else {
                   echo "Images were not uploaded. Please upload images by clicking the edit button below.";

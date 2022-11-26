@@ -40,7 +40,8 @@ img {
 
 .personal-details-div,
 .appartment-info-div,
-.appartment-tenant-div {
+.appartment-tenant-div,
+.tenant-info {
     padding: 20px;
     border-radius: 16px;
     background: rgb(248, 248, 248);
@@ -73,4 +74,17 @@ input.view {
 
 input.btn {
     width: fit-content;
+}
+
+.appartment-photo-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 16px;
+}
+
+.appartment-images {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

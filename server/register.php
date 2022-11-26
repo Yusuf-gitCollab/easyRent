@@ -65,7 +65,7 @@ if(isset($_POST['reg_user'])) {
             $_SESSION['usertype'] = "tenant";
             
             echo "<script>alert('Login Successfully!')</script>";
-            echo "<script>window.location='../public/index.php'</script>";
+            echo "<script>window.location.href='../public/index.php'</script>";
             die();
         }else {
             echo "<script> alert('woops some error occured. Please try again or contact support team.') </script>";
@@ -262,7 +262,7 @@ if(isset($_POST['login_landlord'])) {
         $_SESSION['edit-profile'] = false;
         $_SESSION['usertype'] = "landlord";
         echo "<script>alert('Login Successfully!')</script>";
-        echo "<script>window.location='../public/pages/landlord-reg.php'</script>";
+        echo "<script>window.location.href ='../public/pages/landlord-reg.php'</script>";
     }else {
         array_push($errors, "Wrong Email / password combination");
         echo "<script> alert('wrong email or password combination. Try again or create a new account.') </script>";
@@ -273,7 +273,7 @@ if(isset($_POST['login_landlord'])) {
 
 if(isset($_POST['logout_landlord'])) {
     echo "<script> alert('You are successfully logged out') </script>";
-    echo"<scrip> window.location.href('./logout.php') </script>";
+    echo"<script> window.location.href = './logout.php'; </script>";
 }
 
 if(isset($_POST['delete_landlord'])) {
@@ -308,6 +308,7 @@ if(isset($_POST['edit_landlord'])){
 }
 
 if(isset($_POST['resave_landlord'])) {
+    
     $_SESSION['edit-profile'] = false;
     header('Location: http://localhost/easyRent/public/pages/landlord-reg.php');
     exit();
