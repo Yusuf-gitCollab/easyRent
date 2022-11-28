@@ -111,8 +111,6 @@
             $requested_location = mysqli_real_escape_string($con, $requested_location);
       
             $raw_results = mysqli_query($con, "SELECT * FROM landlord WHERE `appartment_location` LIKE '%$requested_location%' " );
-            $row = mysqli_fetch_assoc($raw_results);
-        
             if(mysqli_num_rows($raw_results) == 0) {
               echo "nothing to show here. Try another search term.";
               echo "please checking typing errors";
@@ -124,6 +122,53 @@
         }
         
       ?>
+      <?php if(isset($raw_results) and mysqli_num_rows($raw_results) > 0) : ?>
+        <div class="grid">
+          <?php while($row = mysqli_fetch_assoc($raw_results)) { ?>
+            <!-----GET AN IMAGE OF THE APPARTMENT --->
+            <a href="" class="grid-link">
+              <?php 
+                $app_name = $row['appartment_name'];
+                $lanlord_name = $row['landlord_name'];
+                $app_type = $row['appartment_type'];
+                $app_fac = $row['app_fac'];
+                $app_occ = $row['appartment_occupied'];
+                $app_rent = $row['appartment_rent'];
+
+                $app_ref = $row['mobile_number'];
+                $query_images = "SELECT * FROM images WHERE app_ref = '$app_ref' LIMIT 1";
+                $file_name = mysqli_fetch_assoc(mysqli_query($con, $query_images))['file_name'];
+                $file_path = "../../server/uploads/". $file_name;
+              ?>
+              <div class="showcase-div">
+                <div class="img-wrapper">
+                  <img src="<?php echo(htmlspecialchars($file_path)) ?>" alt="">
+                </div>
+                <div class="appartment_info">
+                  <p class="app_name"> <?php echo"$app_name" ?> </p>
+                  <p Rs. class="app_rent"> <?php echo"$app_rent" ?> per month </p>
+                  <p> Posted by:  <?php echo"$lanlord_name" ?> </p>
+                  <p> <?php echo"$app_type" ?> </p>
+                  <p> <?php echo"$app_fac" ?> </p>
+                  
+
+                  <div class="button-wrapper">
+                    <?php
+                      if($app_occ === "0") {
+                        echo "<span class='available'> Available </span>";
+                      }else {
+                        echo "<span class='closed'> Booked </span>";
+                      }
+                    ?>
+
+                    <span class="btn-outline">View</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          <?php }; ?>
+        </div>
+      <?php endif ?>
     </div>
   </section>
 </body>

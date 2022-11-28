@@ -52,3 +52,72 @@ input[type="submit"]:hover {
     border: 2px solid #ff385c;
 }
 
+.grid {
+    margin: 24px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.showcase-div:hover {
+    cursor: pointer;
+    transform: translateY(-8px);
+}
+
+.showcase-div {
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.appartment_info {
+    padding: 18px;
+}
+
+.appartment_info p {
+    margin: 4px 0;
+    font-weight: 400;
+}
+
+p.app_name {
+    color: #ff385c;
+    font-weight: 600;
+}
+
+p.app_rent {
+    font-weight: 600;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.button-wrapper span {
+    font-weight: 600;
+}
+
+span.available {
+    color: rgb(0, 241, 0);
+}
+
+span.closed {
+    color: red;
+}
+
+.btn-outline {
+    color: #ff385c;
+    font-weight: 600;
+}
+
+.grid a.grid-link {
+    color: #000;
+    display: block;
+}
+
+
+

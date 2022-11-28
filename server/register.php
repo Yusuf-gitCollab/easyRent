@@ -1,4 +1,5 @@
 <?php 
+use Vtiful\Kernel\Excel;
 
 // php script to set up connection with database
 require_once('./connection.php');
@@ -53,7 +54,8 @@ if(isset($_POST['reg_user'])) {
         $query = "INSERT INTO users (userid, mobile_number, email_id, username, pwd, appartment_id) 
                   VALUES('$uniq_id', '$mobile_number', '$email', '$username', '$password', null) ";
 
-        if(mysqli_query($con, $query)) {
+        try {
+            mysqli_query($con, $query);
             if(isset($_SESSION['usertype']) and  $_SESSION['usertype'] == "landlord") {
                 session_destroy();
                 session_start();
@@ -67,9 +69,10 @@ if(isset($_POST['reg_user'])) {
             echo "<script>alert('Login Successfully!')</script>";
             echo "<script>window.location.href='../public/index.php'</script>";
             die();
-        }else {
+        }catch(Exception $e) {
             echo "<script> alert('woops some error occured. Please try again or contact support team.') </script>";
             echo "<script> history.back(); </script>";
+            echo "here we are";
             die();
         }
     }else {
@@ -175,8 +178,9 @@ if(isset($_POST['reg_landlord'])) {
         , appartment_rent, landlord_pwd, email_id, mobile_number, profile_pic, landlord_location, appartment_location, app_fac )
                   VALUES('$appartment_id', '$username', '$appartment_name', '$appartment_type', '$appartment_number', '$appartment_rent', 
         '$pwd', '$email', '$mobile_number', '$target_file', '$location', '$appartment_location', '$appartment_facilities' )";
-        echo "$query";
-        if(mysqli_query($con, $query)) {
+        
+        try {
+            mysqli_query($con, $query);
             if(isset($_SESSION['usertype']) and  $_SESSION['usertype'] == "tenant") {
                 session_destroy();
                 session_start();
@@ -186,9 +190,10 @@ if(isset($_POST['reg_landlord'])) {
             $_SESSION['logedin'] = true;
             $_SESSION['usertype'] = "landlord";
             $_SESSION['edit-profile'] = false;
-        }else {
-            echo "<script> alert('woops some error occured. Please try again or contact support team.') </script>";
+        }catch (Exception $e) {
+            echo "<script> alert('Mobile number or email already exists. Please try again or contact support team') </script>";
             echo "<script> history.back(); </script>";
+            die();
         }
     }
 
