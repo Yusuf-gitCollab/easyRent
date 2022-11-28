@@ -34,7 +34,7 @@
         <div class="navigation">
           <a href="http://localhost/easyRent/public/index.php"><h1 class="logo">easyRent</h1></a>
           <ul class="nav-menu">
-            <li><a href="./pages/search-page.html">Find Rent/PG</a></li>
+            <li><a href="./pages/search-page.php">Find Rent/PG</a></li>
             <li><a href="./pages/landlord-reg.php">Post Property</a></li>
             
             <?php 

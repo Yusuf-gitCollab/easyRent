@@ -115,7 +115,7 @@ if(isset($_POST['reg_landlord'])) {
     $target_file = "";
     
     if(is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_file = $target_dir. uniqid() . basename($_FILES["fileToUpload"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         
         // check if image file is a actual image or fake image
@@ -199,7 +199,7 @@ if(isset($_POST['reg_landlord'])) {
     if(!empty($file_names)) {
         foreach($_FILES['appartment_images']['name'] as $key => $val) {
             // file upload path
-            $file_name = basename($_FILES['appartment_images']['name'][$key]);
+            $file_name = uniqid() . basename($_FILES['appartment_images']['name'][$key]);
             $targetFilePath =   $target_dir.$file_name;
 
             // check whether file type is valid

@@ -33,14 +33,16 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
   $query = "SELECT * FROM users WHERE email_id = '$tenant_id'";
   $result = mysqli_fetch_assoc(mysqli_query($con, $query));
   // var_dump($result);
-  $tenant_name = $result['username'];
-  $tenant_email = $result['email_id'];
-  $tenant_phone = $result['mobile_number'];
-  $tenant_start_date = $result['start_date'];
-  $tenant_end_date = $result['end_date'];
-  $payable_amt = $result['payable_amt'];
-  $start_date = $result['start_date'];
-  $end_date = $result['end_date'];
+  if($appartment_occupied !== "0") {
+    $tenant_name = $result['username'];
+    $tenant_email = $result['email_id'];
+    $tenant_phone = $result['mobile_number'];
+    $tenant_start_date = $result['start_date'];
+    $tenant_end_date = $result['end_date'];
+    $payable_amt = $result['payable_amt'];
+    $start_date = $result['start_date'];
+    $end_date = $result['end_date'];
+  }
 }
 
 ?>
@@ -54,6 +56,9 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
   <title>Register | easyRent</title>
   <link href="../../css/style.css" rel="stylesheet" type="text/css">
   <link href="../../css/account-page.css" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -65,9 +70,6 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
           <h1 class="logo">easyRent</h1>
         </a>
         <ul class="nav-menu">
-          <li><a href="">Find Rent/PG</a></li>
-          <li><a href="">Coworking</a></li>
-          <li><a href="">Post Property</a></li>
           <?php 
               require('../../server/connection.php');
               if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) :
@@ -93,10 +95,10 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
                 </a>
               </li>
               <li>
-                <a href="../server/logout.php" class="btn" style="color: white;">Log out</a>
+                <a href="../../server/logout.php" class="btn" style="color: white;">Log out</a>
               </li>
             <?php else: ?>
-              <li><a href="./pages/log-option.html" class="btn" style="color: white">Sign in</a></li>
+              <li><a href="./log-option.html" class="btn" style="color: white">Sign in</a></li>
             <?php endif; ?>
         </ul>
 
@@ -111,12 +113,12 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
           <div class="account-header">
             <!------------------------------ PROFILE IMAGE DIV -------------------------------------->
             <div
-              class="profile-img <?php echo (isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and $profile_pic !== null) ? 'view' : '' ?>">
+              class="profile-img <?php echo (isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and strlen($profile_pic) !== "0") ? 'view' : '' ?>">
 
               <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?> 
               <!--- this is executed when the user is signed in -->
                 <?php
-                  if($profile_pic !== null) {
+                  if(strlen($profile_pic) !== "0") {
                     $img_path = "../../server".$profile_pic;
                     echo "$img_path";
                     echo "<img src='$img_path' alt='profile image'>";
