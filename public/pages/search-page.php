@@ -35,7 +35,7 @@
               ?>
           <li>
             <a
-              href="<?php echo ($_SESSION['usertype'] == 'landlord') ?  './pages/landlord-reg.php' : './pages/user-profile.php' ?>">
+              href="<?php echo ($_SESSION['usertype'] == 'landlord') ?  './landlord-reg.php' : './user-profile.php' ?>">
               <?php 
                       if(isset($_SESSION['usertype']) and $_SESSION['usertype'] == "tenant") {
                         $query = mysqli_query($con, "SELECT * FROM `users` WHERE `email_id`='$_SESSION[username]'");
@@ -55,10 +55,10 @@
             </a>
           </li>
           <li>
-            <a href="../server/logout.php" class="btn" style="color: white;">Log out</a>
+            <a href="../../server/logout.php" class="btn" style="color: white;">Log out</a>
           </li>
           <?php else: ?>
-          <li><a href="./pages/log-option.html" class="btn" style="color: white">Sign in</a></li>
+          <li><a href="./log-option.html" class="btn" style="color: white">Sign in</a></li>
           <?php endif; ?>
         </ul>
 
