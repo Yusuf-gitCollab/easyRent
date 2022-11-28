@@ -99,6 +99,7 @@ p.app_rent {
 
 .button-wrapper span {
     font-weight: 600;
+    padding: 16px 0;
 }
 
 span.available {

@@ -126,7 +126,7 @@
         <div class="grid">
           <?php while($row = mysqli_fetch_assoc($raw_results)) { ?>
             <!-----GET AN IMAGE OF THE APPARTMENT --->
-            <a href="" class="grid-link">
+            <form action="./booking.php" method="get" class="form" class="grid-link"> <!------- This anchor tag envelops the div making it clickable--->
               <?php 
                 $app_name = $row['appartment_name'];
                 $lanlord_name = $row['landlord_name'];
@@ -163,14 +163,31 @@
 
                     <span class="btn-outline">View</span>
                   </div>
-                </div>
-              </div>
-            </a>
+                </div> <!------------------------------- APPARTMENT INFO DIV CLOSE --------------------->
+              </div> <!-------------------- SHOWCASE DIV CLOSING -------------->
+              <input type="hidden" value="<?php echo "$app_ref" ?>" name="app_ref">
+            </form>
           <?php }; ?>
         </div>
       <?php endif ?>
     </div>
   </section>
 </body>
+<script> 
+  var forms = document.querySelectorAll('.form');
+ console.log(forms);
+  // forms.forEach(form => {
+  //   form.addEventListener("click", () => {
+  //     form.submit();
+  //   });
+  // });
 
+  for(let form of forms) {
+    form.addEventListener("click", (e) => {
+      e.preventDefault();
+      form.requestSubmit();
+      console.log(form)
+    })
+  }
+</script>
 </html>
