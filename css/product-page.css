@@ -30,4 +30,12 @@
     line-height: 1.6;
 }
 
+.product-wrapper input.btn {
+    display: block;
+    width: fit-content;
+    margin: 30px 0;
+    outline: none;
+    border: none;
+}
+
 

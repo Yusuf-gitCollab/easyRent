@@ -1,5 +1,4 @@
 <?php 
-use Vtiful\Kernel\Excel;
 
 // php script to set up connection with database
 require_once('./connection.php');

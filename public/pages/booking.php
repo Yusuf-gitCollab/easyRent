@@ -17,7 +17,6 @@ require('../../server/connection.php');
     $rent = $result['appartment_rent'];
     $mobile_number = $result['mobile_number'];
     $app_status = $result['appartment_occupied'];
-    // $app_name = $result[''];
 
     $image_array = array();
 
@@ -128,7 +127,13 @@ require('../../server/connection.php');
         </div>
 
         <?php if($app_status === "0"): ?>
-          <a class="btn"> book </a>
+          <p>The appartment is available for booking</p>
+          <form action="../../server/handle_booking.php" method="GET">
+            <input type="hidden" name="app_ref" value='<?php echo"$mobile_number" ?>'>
+            <input type="submit" class="btn"  value="Book">
+          </form>
+        <?php else: ?>
+          <p> The appartment is already booked </p>
         <?php endif ?>
       </div>
     </div>
