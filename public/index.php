@@ -77,17 +77,17 @@
         <div class="banner-wrapper">
           <h1 class="heading">Find Your Place of Comfort</h1>
           <h2 class="tagline">Find home to rent or buy, PG and shared rooms</h2>
-          <form>
+          <form  action="./pages/search-page.php" method="GET"> 
             <div class="card">
               <div class="option-div">
                 <button type="button" role="tab" data-state="active" class="tab">Paying Guest</button>
                 <button type="button" role="tab" data-state="" class="tab">Rent</button>
               </div>
               <div class="search-div">
-                <form role="search">
+                <form role="search" action="./pages/search-page.php" method="GET">
                   <div class="search-input-wrapper">
-                    <input placeholder="Enter a city, town or postcode">
-                    <button type="button" class="btn" id="search-btn"> 
+                    <input placeholder="Enter a city, town or postcode"  name="location" required>
+                    <button type="submit" class="btn" name="search" id="search-btn"> 
                       <div class="icon-search-text-wrapper">
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <p>Search</p>

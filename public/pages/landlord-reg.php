@@ -23,7 +23,6 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
   $appartment_type = $user['appartment_type'];
   $landlord_location = $user['landlord_location'];
   $app_fac = $user['app_fac'];
-  $profile_pic = $user['profile_pic'];
 
   // tenant information
   $tenant_id = $user['tenant_id'];
@@ -111,29 +110,6 @@ if(isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and ((isset($_SE
       <form action="../../server/register.php" method="POST" enctype="multipart/form-data">
         <div class="landlord-account-wrapper"> <!---- contains different divs like personal details div, appartment details div etc --->
           <div class="account-header">
-            <!------------------------------ PROFILE IMAGE DIV -------------------------------------->
-            <div
-              class="profile-img <?php echo (isset($_SESSION['logedin']) and $_SESSION['logedin'] == true and strlen($profile_pic) !== "0") ? 'view' : '' ?>">
-
-              <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?> 
-              <!--- this is executed when the user is signed in -->
-                <?php
-                  if(strlen($profile_pic) !== "0") {
-                    $img_path = "../../server".$profile_pic;
-                    echo "$img_path";
-                    echo "<img src='$img_path' alt='profile image'>";
-                  }else {
-                    echo "upload profile image";
-                  }
-                
-                ?>
-              <?php elseif ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == true)): ?>
-              <!-- this is executed when the user is loged in but wants to edit his / her profile -->
-              <?php else: ?>
-              <label for="fileToUpload"> Upload Image </label>
-              <input type="file" name="fileToUpload" id="fileToUpload">
-              <?php endif ?>
-            </div>
             <!---------------------------------------- PROFILE BASIC INFO ------------------------------------>
             <div class="profile-basic-info">
               <?php if ((isset($_SESSION['logedin']) and $_SESSION['logedin'] == true) and (isset($_SESSION['edit-profile']) and $_SESSION['edit-profile'] == false)): ?>

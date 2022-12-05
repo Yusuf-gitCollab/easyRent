@@ -70,10 +70,14 @@
     <div class="container">
       <h1 class="search-page-heading">Search from thousands of rental listings</h1>
       <p class="subheading">Enter a location. Search through appartment type or price with easy Rent</p>
-      <form action="" method="GET">
+      <form action="" method="GET" id="data-form">
         <div class="search-box">
-
-          <input type="text" id="location" placeholder="Enter a location" name="location" required>
+          <?php 
+            if(isset($_GET['location'])) {
+              $location = $_GET['location'];
+            }
+          ?>
+          <input type="text" id="location" placeholder="Enter a location" name="location" value="<?php echo (isset($_GET['location'])) ? "$location" : ""  ?>" required>
 
           <select name="app_type" id="app_type" placeholder="Appartment Type">
             <option value="" disabled selected>Appartment Type</option>
@@ -92,7 +96,7 @@
             <option value="2BHK">more than 20,000</option>
           </select>
 
-          <input type="submit" value="Search" name="search">
+          <input type="submit" value="Search"  name="search">
         </div>
         <!---- end of search box div-->
       </form>

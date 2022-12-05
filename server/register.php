@@ -64,6 +64,7 @@ if(isset($_POST['reg_user'])) {
             $_SESSION['logedin'] = true;
             $_SESSION['success'] = "you are registered";
             $_SESSION['usertype'] = "tenant";
+            $_SESSION['edit-profile'] = false;
             
             echo "<script>alert('Login Successfully!')</script>";
             echo "<script>window.location.href='../public/index.php'</script>";
@@ -99,6 +100,7 @@ if(isset($_POST['login_user'])) {
             $_SESSION['success'] = "You are now logged in!";
             $_SESSION['logedin'] = true;
             $_SESSION['usertype'] = "tenant";
+            $_SESSION['edit-profile'] = false;
             echo "<script>alert('Login Successfully!')</script>";
             echo "<script>window.location='../public/index.php'</script>";
         }else {
@@ -115,35 +117,6 @@ if(isset($_POST['reg_landlord'])) {
     $allowTypes = array('jpg','png','jpeg','gif','pdf');
     $target_dir = "uploads/";
     $target_file = "";
-    
-    if(is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {
-        $target_file = $target_dir. uniqid() . basename($_FILES["fileToUpload"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        
-        // check if image file is a actual image or fake image
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            echo "File is an image - ".$check["mime"];
-        }else {
-            echo "<script> alert('File is not an image') </script>";
-            echo "<script> history.back(); </script>";
-            die();
-        }
-
-        // check file size
-        if($_FILES["fileToUpload"]["size"] > 500000) {
-            echo "<script> alert('File is too big an image') </script>";
-            echo "<script> history.back(); </script>";
-            die();
-        }
-
-        if(!in_array($imageFileType, $allowTypes)) {
-            echo "<script> alert('Sorry only JPG, JPEG, PNG & GIF files are allowed') </script>";
-            echo "<script> history.back(); </script>";
-            die();
-        }
-    }
-    
 
     $username = mysqli_real_escape_string($con, $_POST['landlord_name']);
     $location = mysqli_real_escape_string($con, $_POST['location']);
